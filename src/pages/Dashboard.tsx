@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
   if (loading) {
     return (
       <div className="p-6 flex items-center justify-center min-h-64">
-        <Loader className="w-8 h-8 animate-spin text-blue-500" />
+        <Loader className="w-8 h-8 animate-spin text-blue-500" role="status" />
       </div>
     );
   }
