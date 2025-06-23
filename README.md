@@ -28,6 +28,7 @@ A modern, full-featured task management application built with React, TypeScript
 - **Context API** - Global state management for authentication
 - **Error Handling** - Comprehensive error handling and user feedback
 - **Token Refresh** - Automatic token refresh for seamless user experience
+- **Comprehensive Testing** - Unit tests with Jest and React Testing Library
 
 ## 🛠️ Tech Stack
 
@@ -36,6 +37,7 @@ A modern, full-featured task management application built with React, TypeScript
 - **Icons**: Lucide React
 - **HTTP Client**: Axios
 - **Routing**: React Router DOM
+- **Testing**: Jest + React Testing Library
 - **Build Tool**: Vite
 - **Development**: ESLint, TypeScript ESLint
 
@@ -67,12 +69,24 @@ npm run dev
 
 The application will be available at `http://localhost:3000`
 
-### 4. Build for Production
+### 4. Run Tests
+```bash
+# Run tests once
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Run tests with coverage
+npm run test:coverage
+```
+
+### 5. Build for Production
 ```bash
 npm run build
 ```
 
-### 5. Preview Production Build
+### 6. Preview Production Build
 ```bash
 npm run preview
 ```
@@ -81,27 +95,82 @@ npm run preview
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── Layout.tsx      # Main application layout
-│   ├── ProtectedRoute.tsx  # Route protection component
-│   ├── TaskModal.tsx   # Task creation/editing modal
-│   └── HealthCheck.tsx # API health monitoring component
-├── contexts/           # React Context providers
-│   └── AuthContext.tsx # Authentication state management
-├── pages/              # Page components
-│   ├── Dashboard.tsx   # Main dashboard with statistics
-│   ├── Tasks.tsx       # Task management page
-│   ├── Login.tsx       # User login page
-│   ├── Register.tsx    # User registration page
-│   └── Profile.tsx     # User profile and statistics
-├── services/           # API service layer
-│   └── api.ts          # HTTP client and API endpoints
-├── types/              # TypeScript type definitions
-│   └── index.ts        # Application types and interfaces
-├── App.tsx             # Main application component
-├── main.tsx            # Application entry point
-└── index.css           # Global styles and Tailwind imports
+├── components/                 # Reusable UI components
+│   ├── __tests__/             # Component tests
+│   │   ├── HealthCheck.test.tsx
+│   │   └── ProtectedRoute.test.tsx
+│   ├── Layout.tsx             # Main application layout
+│   ├── ProtectedRoute.tsx     # Route protection component
+│   ├── TaskModal.tsx          # Task creation/editing modal
+│   └── HealthCheck.tsx        # API health monitoring component
+├── contexts/                  # React Context providers
+│   └── AuthContext.tsx        # Authentication state management
+├── pages/                     # Page components
+│   ├── __tests__/             # Page tests
+│   │   ├── Dashboard.test.tsx
+│   │   └── Login.test.tsx
+│   ├── Dashboard.tsx          # Main dashboard with statistics
+│   ├── Tasks.tsx              # Task management page
+│   ├── Login.tsx              # User login page
+│   ├── Register.tsx           # User registration page
+│   └── Profile.tsx            # User profile and statistics
+├── services/                  # API service layer
+│   └── api.ts                 # HTTP client and API endpoints
+├── types/                     # TypeScript type definitions
+│   └── index.ts               # Application types and interfaces
+├── App.tsx                    # Main application component
+├── main.tsx                   # Application entry point
+├── setupTests.ts              # Test configuration and setup
+└── index.css                  # Global styles and Tailwind imports
+
+Configuration Files:
+├── jest.config.cjs            # Jest testing configuration
+├── package.json               # Dependencies and scripts
+├── tsconfig.json              # TypeScript configuration
+├── tsconfig.app.json          # App-specific TypeScript config
+├── tsconfig.node.json         # Node-specific TypeScript config
+├── tailwind.config.js         # Tailwind CSS configuration
+├── vite.config.ts             # Vite build configuration
+├── eslint.config.js           # ESLint configuration
+└── postcss.config.js          # PostCSS configuration
 ```
+
+## 🧪 Testing
+
+The application includes comprehensive testing with Jest and React Testing Library.
+
+### Test Structure
+- **Component Tests**: Located in `src/components/__tests__/`
+- **Page Tests**: Located in `src/pages/__tests__/`
+- **Test Setup**: Configured in `src/setupTests.ts`
+
+### Test Features
+- **Clean Output**: Warnings suppressed for cleaner test results
+- **Mocked APIs**: All external API calls are mocked
+- **React Router Support**: Tests include proper router context
+- **Authentication Context**: Tests run with auth provider
+- **TypeScript Support**: Full TypeScript integration in tests
+
+### Available Test Commands
+```bash
+# Run all tests
+npm test
+
+# Run tests in watch mode (re-runs on file changes)
+npm run test:watch
+
+# Run tests with coverage report
+npm run test:coverage
+```
+
+### Test Coverage
+The test suite covers:
+- ✅ Component rendering without errors
+- ✅ Authentication flow components
+- ✅ Protected route functionality
+- ✅ API health monitoring
+- ✅ Dashboard statistics display
+- ✅ Login form functionality
 
 ## 🔧 Configuration
 
@@ -214,19 +283,39 @@ The application expects the following backend endpoints:
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
 - `npm run lint` - Run ESLint
+- `npm test` - Run tests
+- `npm run test:watch` - Run tests in watch mode
+- `npm run test:coverage` - Run tests with coverage
 
 ### Code Style
 - **TypeScript**: Strict type checking enabled
 - **ESLint**: Configured with React and TypeScript rules
 - **Prettier**: Code formatting (recommended)
+- **Testing**: Jest with React Testing Library
+
+### Development Workflow
+1. **Feature Development**: Create components with corresponding tests
+2. **Testing**: Write unit tests for new functionality
+3. **Type Safety**: Ensure proper TypeScript typing
+4. **Code Quality**: Run ESLint and fix any issues
+5. **Testing**: Verify all tests pass before committing
 
 ## 🤝 Contributing
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+3. Write tests for your changes
+4. Ensure all tests pass (`npm test`)
+5. Commit your changes (`git commit -m 'Add some amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Contribution Guidelines
+- Write tests for new features
+- Maintain TypeScript type safety
+- Follow existing code style
+- Update documentation as needed
+- Ensure all tests pass
 
 ## 📝 License
 
@@ -251,13 +340,19 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Check Node.js version compatibility
 - Verify all dependencies are properly installed
 
+**Test Issues**
+- Run `npm test` to check for test failures
+- Ensure all mocks are properly configured
+- Check for TypeScript compilation errors
+
 ### Getting Help
 
 If you encounter issues:
 1. Check the browser console for error messages
 2. Verify backend API is running and accessible
 3. Review the network tab for failed requests
-4. Check this README for configuration requirements
+4. Run tests to identify potential issues
+5. Check this README for configuration requirements
 
 ## 🎉 Acknowledgments
 
@@ -265,6 +360,7 @@ If you encounter issues:
 - Styled with Tailwind CSS
 - Icons provided by Lucide React
 - HTTP client powered by Axios
+- Testing with Jest and React Testing Library
 
 ---
 
